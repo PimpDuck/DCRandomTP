@@ -1,4 +1,4 @@
 DCRandomTP
 ==========
 
-My DCRandomTP plugin :)
+DCRandomTP plugin :)
