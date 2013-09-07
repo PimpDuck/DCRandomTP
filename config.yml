@@ -1,0 +1,14 @@
+DCRandomTP:
+  Teleport:
+    CoordsX: 5000
+    CoordsZ: 5000
+    SafeTeleport: false
+    World: world
+
+  AntiCheat:
+    Enable: false
+    MinumumHealthLevel: 5
+
+  Cooldown:
+    Enable: false
+    CooldownTime: 200
