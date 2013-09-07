@@ -1,37 +1,49 @@
 package me.PimpDuck.DCRandomTP;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
-public class Cooldown
+class PlayerCooldown
 {
-  private static Set<PlayerCooldown> cooldowns = new HashSet();
+  private long startTime;
+  private String playerName;
+  private String cooldownName;
+  private long lengthInMillis;
+  private long endTime;
+  private boolean overFirst = false;
 
-  public static void addCooldown(String cooldownName, String player, long lengthInMillis) {
-    PlayerCooldown pc = new PlayerCooldown(cooldownName, player, lengthInMillis);
-    Iterator it = cooldowns.iterator();
-
-    while (it.hasNext()) {
-      PlayerCooldown iterated = (PlayerCooldown)it.next();
-      if ((!iterated.getPlayerName().equalsIgnoreCase(pc.getPlayerName())) || 
-        (!iterated.getCooldownName().equalsIgnoreCase(pc.getCooldownName()))) continue;
-      it.remove();
-    }
-
-    cooldowns.add(pc);
+  PlayerCooldown(String cooldownName, String player, long lengthInMillis) {
+    this.cooldownName = cooldownName;
+    this.startTime = System.currentTimeMillis();
+    this.playerName = player;
+    this.lengthInMillis = lengthInMillis;
+    this.endTime = (this.startTime + this.lengthInMillis);
+  }
+  public PlayerCooldown(String cooldownName, String playerName, long length, boolean over) {
+    this(cooldownName, playerName, length);
+    this.overFirst = true;
   }
 
-  public static PlayerCooldown getCooldown(String cooldownName, String playerName, long length) {
-    Iterator it = cooldowns.iterator();
-    while (it.hasNext()) {
-      PlayerCooldown pc = (PlayerCooldown)it.next();
-      if ((pc.getCooldownName().equalsIgnoreCase(cooldownName)) && 
-        (pc.getPlayerName().equalsIgnoreCase(playerName))) {
-        return pc;
-      }
+  public boolean isOver()
+  {
+    if (this.overFirst) {
+      this.overFirst = false;
+      return true;
     }
+    return this.endTime < System.currentTimeMillis();
+  }
 
-    return new PlayerCooldown(cooldownName, playerName, length, true);
+  public int getTimeLeft() {
+    return (int)(this.endTime - System.currentTimeMillis());
+  }
+
+  public String getPlayerName() {
+    return this.playerName;
+  }
+
+  public String getCooldownName() {
+    return this.cooldownName;
+  }
+
+  public void reset() {
+    this.startTime = System.currentTimeMillis();
+    this.endTime = (this.startTime + this.lengthInMillis);
   }
 }
