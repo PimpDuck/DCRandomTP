@@ -1,0 +1,6 @@
+name: DCRandomTP
+main: me.PimpDuck.DCRandomTP.Main
+version: 1.0
+commands:
+  randomtp:
+    description: Teleports the player to a random location
