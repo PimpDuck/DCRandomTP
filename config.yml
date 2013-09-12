@@ -1,14 +1,13 @@
+#DCRandomTP ~ Created by PimpDuck#
+#Cooldown is in hours#
 DCRandomTP:
-  Teleport:
-    CoordsX: 5000
-    CoordsZ: 5000
-    SafeTeleport: false
-    World: world
-
-  AntiCheat:
-    Enable: false
-    MinumumHealthLevel: 5
-
-  Cooldown:
-    Enable: false
-    CooldownTime: 200
+  Message: "&bPlease wait while we find you a safe location."
+  Chat-Prefix:  " &f[&bDC&cRandom&bTP&f] " 
+  World: World
+  Min-x: 1
+  Max-x: 3000
+  Min-z: 1
+  Max-z: 3000
+  
+  Options:
+    Cooldown: 6
